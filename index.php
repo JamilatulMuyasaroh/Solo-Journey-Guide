@@ -175,7 +175,7 @@ else{
 <!-- About End -->
 
 <!-- Service Start -->
-<div class="container-xxl py-5">
+<div  class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center px-3" style="color: var(--primary);">Services</h6>
@@ -934,7 +934,7 @@ else{
 </div>
 
 <!-- Team Start -->
-<div class="container-xxl py-5">
+<div id="team-section" class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center px-3" style="color: var(--primary);">TEAM</h6>
@@ -1183,7 +1183,7 @@ else{
                         &copy; <a class="border-bottom" href="#">Solo Journey Guide</a>, All Right Reserved.
 
                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        Designed By <a class="border-bottom" href="#team-section">Group 8</a>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
