@@ -153,7 +153,7 @@ else{
                         </div>
                         <div class="ms-3">
                             <h5 style="color: #527853;">Mobile</h5>
-                            <p class="mb-0">+012 345 67890</p>
+                            <p class="mb-0">+62 123 4567 8910</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -225,9 +225,9 @@ else{
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jebres, Surakarta</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Kota Surakarta, Jawa Tengah, Indonesia</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+62 123 4567 8910</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>soloJG@gmail.com</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>infojourneyguide@gmail.com</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
