@@ -61,9 +61,9 @@ else{
     <div class="row gx-0">
         <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
-                <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>Jebres, Surakarta</small>
+                <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>>Kota Surakarta, Jawa Tengah, Indonesia</small>
                 <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+62 123 4567 8910</small>
-                <small class="text-light"><i class="fa fa-envelope-open me-2"></i>soloJG@gmail.com</small>
+                <small class="text-light"><i class="fa fa-envelope-open me-2"></i>infojourneyguide@gmail.com</small>
             </div>
         </div>
         <div class="col-lg-4 text-center text-lg-end">
