@@ -174,6 +174,80 @@ else{
 </div>
 
 <!-- Booking Start -->    
+<?php
+// Cek apakah sesi sudah dimulai
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Sertakan file koneksi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rplproject";
+
+// Buat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$error_messages = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $datetime = $_POST['datetime'];
+    $package = $_POST['package'];
+    $message = $_POST['message'];
+
+    // Validasi input
+    if (empty($name)) {
+        $error_messages[] = "Nama tidak boleh kosong.";
+    }
+    if (empty($email)) {
+        $error_messages[] = "Email tidak boleh kosong.";
+    }
+    if (empty($datetime)) {
+        $error_messages[] = "Tanggal dan waktu tidak boleh kosong.";
+    }
+    if (empty($package)) {
+        $error_messages[] = "Pilihan paket wisata tidak boleh kosong.";
+    }
+
+    // Handle file upload
+    $target_dir = "uploads/";
+    if (!file_exists($target_dir)) {
+        mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
+    }
+    $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
+
+    if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
+        // Insert data into database
+        $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            $error_messages[] = "Prepare statement failed.";
+        } else {
+            $stmt->bind_param("ssssss", $name, $email, $datetime, $package, $message, $target_file);
+            if ($stmt->execute()) {
+                $success_message = "Data pesanan berhasil disimpan.";
+            } else {
+                $error_messages[] = "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        }
+    } else {
+        $error_messages[] = "Gagal mengunggah bukti transfer.";
+    }
+}
+
+?>
+
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="booking p-5">
@@ -185,56 +259,77 @@ else{
                 </div>
                 <div class="col-md-6">
                     <h1 class="text-white mb-4">Book A Tour</h1>
-                    <form id="bookingForm">
+                    <?php if (!empty($error_messages)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                <?php foreach ($error_messages as $error): ?>
+                                    <li><?php echo $error; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($success_message)): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $success_message; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form id="bookingForm" enctype="multipart/form-data" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name">
+                                    <input type="text" class="form-control bg-transparent" id="name" name="name" placeholder="Your Name" required>
                                     <label for="name">Nama Lengkap</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating">                                        
-                                    <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control bg-transparent" id="email" name="email" placeholder="Your Email" required>
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
+                                    <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" name="datetime" placeholder="YYYY-MM-DD HH:MM:SS" data-target="#date3" data-toggle="datetimepicker" required />
                                     <label for="datetime">Hari & Tanggal</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select bg-transparent" id="select1">
-                                        <option value="1">Paket 1</option>
-                                        <option value="2">Paket 2</option>
-                                        <option value="3">Paket 3</option>
-                                        <option value="1">Paket 4</option>
-                                        <option value="2">Paket 5</option>
-                                        <option value="3">Paket 6</option>
-                                        <option value="1">Paket 7</option>
-                                        <option value="2">Paket 8</option>
-                                        <option value="3">Paket 9</option>
-                                        <option value="1">Paket 10</option>
-                                        <option value="2">Paket 11</option>
-                                        <option value="3">Paket 12</option>
-                                        <option value="1">Paket 13</option>
-                                        <option value="2">Paket 14</option>
-                                        <option value="3">Paket 15</option>
+                                    <select class="form-select bg-transparent" id="select1" name="package" required>
+                                        <option value="">Pilih Paket Wisata</option>
+                                        <option value="Paket 1">Paket 1</option>
+                                        <option value="Paket 2">Paket 2</option>
+                                        <option value="Paket 3">Paket 3</option>
+                                        <option value="Paket 4">Paket 4</option>
+                                        <option value="Paket 5">Paket 5</option>
+                                        <option value="Paket 6">Paket 6</option>
+                                        <option value="Paket 7">Paket 7</option>
+                                        <option value="Paket 8">Paket 8</option>
+                                        <option value="Paket 9">Paket 9</option>
+                                        <option value="Paket 10">Paket 10</option>
+                                        <option value="Paket 11">Paket 11</option>
+                                        <option value="Paket 12">Paket 12</option>
+                                        <option value="Paket 13">Paket 13</option>
+                                        <option value="Paket 14">Paket 14</option>
+                                        <option value="Paket 15">Paket 15</option>
                                     </select>
                                     <label for="select1">Pilihan Paket Wisata</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
+                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" name="message" style="height: 100px"></textarea>
                                     <label for="message">Special Request</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-outline-light w-100 py-3" type="button" onclick="submitForm()">Book Now</button>
+                                <div class="form-floating">
+                                    <input type="file" class="form-control bg-transparent" id="transferProof" name="transferProof" required>
+                                    <label for="transferProof">Upload Bukti Transfer</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
                             </div>
                         </div>
                     </form>
@@ -243,15 +338,31 @@ else{
         </div>
     </div>
 </div>
+
+<?php
+// Tutup koneksi
+$conn->close();
+?>
 <!-- Booking End -->
 
 <script>
     function submitForm() {
-        alert("Terkirim!");
+        var formData = new FormData(document.getElementById('bookingForm'));
+        
+        fetch('submit_booking.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text())
+        .then(data => {
+            alert("Terkirim!");
+            console.log(data);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
     }
 </script>
 
-        
+     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
