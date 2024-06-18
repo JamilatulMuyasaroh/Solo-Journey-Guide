@@ -14,7 +14,7 @@ else{
 
 <head>
     <meta charset="utf-8">
-    <title>Tourist - Travel Agency HTML Template</title>
+    <title>Solo Journey Guide</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -308,7 +308,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Pasar Gede Hardjonagoro, museum keris, dan Keraton Surakarta Hadiningrat menawarkan pengalaman menyeluruh di Solo. Pasar Gede adalah pasar tradisional terbesar dengan berbagai produk lokal dan kuliner khas seperti nasi liwet dan es dawet telasih. Museum Keris menyimpan lebih dari 400 koleksi keris, menjelaskan proses pembuatannya dan menampilkan keindahan seni tradisional ini. Keraton Surakarta, istana resmi Kesunanan Surakarta, menawarkan wawasan mendalam tentang sejarah dan kebudayaan Jawa melalui koleksi benda-benda kerajaan dan upacara adat yang masih dilestarikan. \n')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -343,7 +343,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert(' Keraton Surakarta Hadiningrat, Museum Tumurun, dan Pasar Klewer memberikan perpaduan sejarah, seni kontemporer, dan belanja batik. Di Keraton Surakarta, pengunjung bisa menikmati keindahan arsitektur Jawa dan mempelajari budaya kerajaan. Museum Tumurun menampilkan seni modern dan kontemporer dengan karya-karya dari seniman lokal dan internasional. Pasar Klewer, pusat batik terbesar di Solo, menawarkan berbagai jenis batik dengan harga terjangkau, menjadikannya tempat ideal untuk berbelanja oleh-oleh.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -378,7 +378,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Keraton Surakarta Hadiningrat, Pasar Triwindu, dan Masjid Raya Sheikh Zayed menyuguhkan wisata sejarah, barang antik, dan keindahan arsitektur Islam. Keraton Surakarta memberikan wawasan tentang sejarah dan budaya Jawa. Pasar Triwindu adalah surga bagi pecinta barang antik dengan berbagai koleksi unik dari masa lalu. Masjid Raya Sheikh Zayed menampilkan arsitektur megah dengan ornamen indah, mencerminkan toleransi dan persahabatan antara Indonesia dan Uni Emirat Arab.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -413,7 +413,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Keraton Surakarta Hadiningrat, Kampung Batik Kauman, dan Museum Keris Solo menyajikan wisata sejarah, seni batik, dan keindahan keris. Di Keraton Surakarta, pengunjung bisa mengeksplorasi sejarah Jawa. Kampung Batik Kauman memungkinkan pengunjung melihat proses pembuatan batik dan bahkan mencoba membuatnya sendiri. Museum Keris Solo menyimpan lebih dari 400 keris, memperlihatkan proses pembuatan dan keindahan seni tradisional ini.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Keraton Surakarta Hadiningrat, Museum Batik Danar Hadi, dan Taman Sriwedari menawarkan pengalaman budaya, sejarah batik, dan rekreasi. Keraton Surakarta menampilkan sejarah dan budaya Jawa yang megah. Museum Batik Danar Hadi menyimpan koleksi batik terbesar di Indonesia, menampilkan proses pembuatannya dan sejarah perkembangan batik. Taman Sriwedari, tempat rekreasi legendaris, menawarkan berbagai fasilitas rekreasi dan pertunjukan seni, menjadikannya tempat yang cocok untuk bersantai bersama keluarga..')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -483,7 +483,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Kunjungi Keraton Surakarta Hadiningrat, istana megah yang didirikan tahun 1744 dan menyimpan berbagai koleksi kerajaan Jawa, serta saksikan upacara adat dan festival budaya. Nikmati keindahan alam dan sejarah di Taman Balekambang, dengan fasilitas taman bunga, danau buatan, dan pertunjukan seni. Berbelanja batik di Pasar Klewer, pusat tekstil terbesar di Solo, yang menawarkan berbagai jenis batik dengan harga terjangkau.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -518,7 +518,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Eksplorasi budaya Jawa di Pura Mangkunegaran, istana berarsitektur Jawa dan Eropa, dengan koleksi seni dan kegiatan budaya yang beragam. Belanja batik di Pasar Klewer, pusat tekstil terbesar di Solo, dengan koleksi batik yang luas dan harga yang dapat dinegosiasikan. Kunjungi Museum Tumurun untuk menikmati seni kontemporer dari seniman lokal dan internasional dalam suasana yang elegan. Pelajari pembuatan batik di Kampung Batik Kauman dan cobalah membuat batik sendiri dalam workshop yang tersedia.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -553,7 +553,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Nikmati keindahan Pura Mangkunegaran, istana megah yang memadukan arsitektur Jawa dan Eropa, serta berbagai koleksi seni. Belanja batik di Pasar Klewer yang terkenal dengan koleksi batik luas dan harga terjangkau. Kunjungi Night Market Ngarsopuro, pasar malam yang meriah dengan beragam barang dan kuliner lokal, serta hiburan musik dan seni. Jelajahi Lokananta Bloc, bekas studio rekaman legendaris yang kini menjadi kompleks wisata kreatif dengan galeri musik, kafe, dan ruang pertunjukan.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -588,7 +588,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Jelajahi Pura Mangkunegaran dengan arsitektur megah dan koleksi seni budaya yang kaya. Nikmati pengalaman unik di The Heritage Palace, bekas pabrik gula dengan arsitektur kolonial yang kini menampilkan museum 3D dan taman indah. Rasakan suasana tradisional di Pasar Gede, pasar terbesar di Solo yang menawarkan berbagai produk lokal dan kuliner khas. Bersantai di Taman Sriwedari, taman kota legendaris yang sering menggelar pertunjukan seni dan memiliki fasilitas rekreasi yang lengkap.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -623,7 +623,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Kunjungi Pura Mangkunegaran, istana berarsitektur Jawa dan Eropa dengan koleksi seni dan budaya yang kaya. Nikmati pengalaman keluarga di Solo Safari, kebun binatang dengan berbagai satwa dan wahana permainan anak. Kagumi arsitektur megah Masjid Raya Sheikh Zayed, simbol persahabatan Indonesia dan UEA, yang juga berfungsi sebagai pusat kegiatan sosial dan budaya. Berbelanja di Pasar Gede, pasar tradisional terbesar di Solo yang menawarkan produk lokal dan kuliner khas.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -658,7 +658,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Jelajahi keindahan Pura Mangkunegaran, sebuah istana megah dengan arsitektur Jawa dan Eropa, penuh koleksi seni dan budaya. Lalu, kunjungi Pasar Klewer, pusat perdagangan batik terbesar di Solo, dengan berbagai pilihan batik dan produk-produk batik jadi. Nikmati juga Keraton Surakarta Hadiningrat, istana bersejarah dengan koleksi kerajaan dan berbagai acara adat. Terakhir, pengalaman unik di Kereta Api Jalandra yang menawarkan pemandangan indah dan nostalgia perjalanan kereta klasik, serta Gedung Djoeang 45, situs sejarah perjuangan kemerdekaan Indonesia.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -693,7 +693,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Jelajahi Pasar Gede Hardjonagoro, pasar tradisional terbesar di Solo yang kaya akan produk lokal dan kuliner khas. Selanjutnya, kunjungi Keraton Surakarta Hadiningrat dengan kekayaan budaya dan sejarah Jawa. Museum Keris Solo menampilkan koleksi keris dari seluruh Indonesia, memperlihatkan proses pembuatan dan filosofinya. Selain itu, nikmati kegembiraan di Waterpark Tirtamas Summerland yang penuh wahana air menarik, dan relaksasi di Taman Sriwedari yang hijau dan bersejarah.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -728,7 +728,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Nikmati kemegahan Masjid Raya Sheikh Zayed dengan arsitektur Islam yang menawan dan kegiatan sosial budaya yang aktif. Kemudian, kunjungi Pasar Gede Hardjonagoro untuk merasakan pasar tradisional Solo dengan berbagai produk lokal dan kuliner. Jelajahi The Heritage Palace yang memadukan arsitektur kolonial dengan atraksi modern. Pandawa Water Land menawarkan wahana air yang menyenangkan di alam yang asri. Akhiri dengan Museum Tumurun, tempat seni kontemporer dengan koleksi karya lokal dan internasional.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -763,7 +763,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Kunjungi Solo Safari, tempat yang menyenangkan untuk melihat berbagai satwa dan belajar tentang konservasi. Lanjutkan dengan mengagumi Masjid Raya Sheikh Zayed, simbol persahabatan Indonesia dan UEA. Berbelanja batik di Pasar Klewer dengan koleksi yang beragam dan harga terjangkau. Taman Balekambang menawarkan keindahan alam dan acara budaya di taman yang tenang. Terakhir, kunjungi Museum Batik Danar Hadi dengan koleksi batik terbesar dan pengetahuan mendalam tentang sejarah batik.')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -798,7 +798,7 @@ else{
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" 
                                style="border-radius: 30px 0 0 30px;" 
                                onclick="alert('Kunjungi Pasar Gede Hardjonagoro, pasar tradisional terbesar dengan suasana yang ramai dan produk lokal yang melimpah. Jelajahi Gedung Djoeang 45, situs sejarah perjuangan kemerdekaan dengan berbagai artefak bersejarah. Taman Sriwedari menyediakan tempat rekreasi yang hijau dan pertunjukan seni. Di Kampung Batik Kauman, Anda bisa melihat langsung proses pembuatan batik dan membeli batik dari pembuatnya. Terakhir, kunjungi Lokananta Bloc, kompleks wisata kreatif yang dulunya adalah studio rekaman legendaris dengan berbagai atraksi seni dan musik.4')">Read More</a>
-                            <a href="booking.html" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                            <a href="booking.php" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
                     </div>
                 </div>
