@@ -173,7 +173,7 @@ else{
     </div>
 </div>
 
-<!-- Booking Start -->    
+<!-- Booking Start -->     
 <?php
 // Cek apakah sesi sudah dimulai
 if (session_status() == PHP_SESSION_NONE) {
@@ -197,11 +197,11 @@ if ($conn->connect_error) {
 $error_messages = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $datetime = $_POST['datetime'];
-    $package = $_POST['package'];
-    $message = $_POST['message'];
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $datetime = isset($_POST['datetime']) ? $_POST['datetime'] : '';
+    $package = isset($_POST['package']) ? $_POST['package'] : '';
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
 
     // Validasi input
     if (empty($name)) {
@@ -218,31 +218,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Handle file upload
-    $target_dir = "uploads/";
-    if (!file_exists($target_dir)) {
-        mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
-    }
-    $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
+    if (isset($_FILES["transferProof"]) && $_FILES["transferProof"]["error"] == 0) {
+        $target_dir = "uploads/";
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
+        }
+        $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
 
-    if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
-        // Insert data into database
-        $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
-                VALUES (?, ?, ?, ?, ?, ?)";
-        
-        $stmt = $conn->prepare($sql);
-        if ($stmt === false) {
-            $error_messages[] = "Prepare statement failed.";
-        } else {
-            $stmt->bind_param("ssssss", $name, $email, $datetime, $package, $message, $target_file);
-            if ($stmt->execute()) {
-                $success_message = "Data pesanan berhasil disimpan.";
+        if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
+            // Insert data into database
+            $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
+                    VALUES (?, ?, ?, ?, ?, ?)";
+            
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                $error_messages[] = "Prepare statement failed.";
             } else {
-                $error_messages[] = "Error: " . $stmt->error;
+                $stmt->bind_param("ssssss", $name, $email, $datetime, $package, $message, $target_file);
+                if ($stmt->execute()) {
+                    $success_message = "Data pesanan berhasil disimpan.";
+                } else {
+                    $error_messages[] = "Error: " . $stmt->error;
+                }
+                $stmt->close();
             }
-            $stmt->close();
+        } else {
+            $error_messages[] = "Gagal mengunggah bukti transfer.";
         }
     } else {
-        $error_messages[] = "Gagal mengunggah bukti transfer.";
+        $error_messages[] = "File bukti transfer tidak ditemukan atau terjadi kesalahan.";
     }
 }
 
@@ -289,7 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" name="datetime" placeholder="YYYY-MM-DD HH:MM:SS" data-target="#date3" data-toggle="datetimepicker" required />
+                                    <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" name="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" required />
                                     <label for="datetime">Hari & Tanggal</label>
                                 </div>
                             </div>
@@ -300,18 +304,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <option value="Paket 1">Paket 1</option>
                                         <option value="Paket 2">Paket 2</option>
                                         <option value="Paket 3">Paket 3</option>
-                                        <option value="Paket 4">Paket 4</option>
-                                        <option value="Paket 5">Paket 5</option>
-                                        <option value="Paket 6">Paket 6</option>
-                                        <option value="Paket 7">Paket 7</option>
-                                        <option value="Paket 8">Paket 8</option>
-                                        <option value="Paket 9">Paket 9</option>
-                                        <option value="Paket 10">Paket 10</option>
-                                        <option value="Paket 11">Paket 11</option>
-                                        <option value="Paket 12">Paket 12</option>
-                                        <option value="Paket 13">Paket 13</option>
-                                        <option value="Paket 14">Paket 14</option>
-                                        <option value="Paket 15">Paket 15</option>
+                                        <!-- Tambahkan pilihan paket wisata lainnya sesuai kebutuhan -->
                                     </select>
                                     <label for="select1">Pilihan Paket Wisata</label>
                                 </div>
@@ -343,24 +336,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Tutup koneksi
 $conn->close();
 ?>
-<!-- Booking End -->
-
-<script>
-    function submitForm() {
-        var formData = new FormData(document.getElementById('bookingForm'));
-        
-        fetch('submit_booking.php', {
-            method: 'POST',
-            body: formData
-        }).then(response => response.text())
-        .then(data => {
-            alert("Terkirim!");
-            console.log(data);
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
 
      
     <!-- Footer Start -->
