@@ -40,9 +40,16 @@ if (isset($_POST["submit"])) {
             if (password_verify($password, $row['password'])) { 
                 $_SESSION["login"] = true;
                 $_SESSION["id"] = $row["id"];
-                // Set cookie untuk login otomatis
-                setcookie("user_id", $row["id"], time() + (86400 * 30), "/"); // 30 hari
-                header("Location: index.php");
+                
+                // Mengambil role dari hasil query
+                $role = $row["role"];
+                
+                // Redirect berdasarkan role
+                if ($role == "admin") {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: index.php");
+                }
                 exit;
             } else {
                 $error_messages[] = "Kata sandi salah.";
@@ -197,11 +204,11 @@ if (isset($_POST["submit"])) {
             ?>
             <form action="" method="post" autocomplete="off">
                 <div class="form-group">
-                    <label untuk="usernameemail">Username atau Email:</label>
+                    <label for="usernameemail">Username atau Email:</label>
                     <input type="text" name="usernameemail" id="usernameemail" required>
                 </div>
                 <div class="form-group">
-                    <label untuk="password">Kata Sandi:</label>
+                    <label for="password">Kata Sandi:</label>
                     <input type="password" name="password" id="password" required>
                 </div>
                 <button type="submit" name="submit">Login</button>

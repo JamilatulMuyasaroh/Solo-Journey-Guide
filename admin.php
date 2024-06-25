@@ -1,5 +1,6 @@
 <?php
 require 'koneksi.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,6 +11,14 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSIO
     header("Location: login.php"); // Redirect ke halaman login jika tidak login
     exit;
 }
+
+// Periksa apakah pengguna telah login dan memiliki peran admin
+// if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"]) || !isset($_SESSION["role"]) || $_SESSION["role"] !== 'admin') {
+//     header("Location: login.php"); // Redirect ke halaman login jika tidak login atau bukan admin
+//     exit;
+// }
+
+
 
 // Ambil data user dari tabel user
 $sql_user = "SELECT * FROM user";
@@ -85,6 +94,25 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
             background-color: #333;
         }
 
+        .homepage {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .homepage a {
+            text-decoration: none;
+            background-color: #EE7214;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .homepage a:hover {
+            background-color: #F7B787;
+        }
+
+
         .btn-hapus {
             background-color: #ff4d4d; /* Red background */
             border: none; /* Remove border */
@@ -114,6 +142,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
                 <th>Nama</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Aksi</th>
             </tr>
             <?php
@@ -124,6 +153,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
                     echo "<td>" . $row['name'] . "</td>";
                     echo "<td>" . $row['username'] . "</td>";
                     echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['role'] . "</td>";
                     echo "<td><a href='deleteuser.php?id=" . $row["id"] . "' class='btn btn-hapus' onclick='return confirm(\"Apakah Anda yakin ingin menghapus item ini?\")'>Hapus</a></td>";
                     echo "</tr>";
                 }
@@ -167,7 +197,10 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
 
 
         <div class="logout">
-            <a href="logout.php">Logout</a>
+            <span><a href="logout.php">Logout</a></span>
+        </div><br>
+        <div class ="homepage">
+            <a href="index.php">Back to HomePage</a>
         </div>
     </div>
 </body>

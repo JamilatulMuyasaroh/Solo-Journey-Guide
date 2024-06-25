@@ -19,6 +19,7 @@ if (isset($_POST["submit"])) {
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirmpassword"];
+    $role = $_POST["role"];
 
     if (empty($name)) {
         $error_messages[] = "Nama tidak boleh kosong.";
@@ -40,6 +41,10 @@ if (isset($_POST["submit"])) {
         $error_messages[] = "Kata sandi dan konfirmasi kata sandi tidak cocok.";
     }
 
+    if (empty($role)) {
+        $error_messages[] = "Role tidak boleh kosong.";
+    }
+
     $duplicate = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username' OR email = '$email'");
     if (mysqli_num_rows($duplicate) > 0) {
         $error_messages[] = "Username atau Email sudah digunakan.";
@@ -47,7 +52,7 @@ if (isset($_POST["submit"])) {
 
     if (empty($error_messages)) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $query = "INSERT INTO user (name, username, email, password) VALUES ('$name', '$username', '$email', '$hashed_password')";
+        $query = "INSERT INTO user (name, username, email, password, role) VALUES ('$name', '$username', '$email', '$hashed_password', '$role')";
         if (mysqli_query($conn, $query)) {
             echo "<script>alert('Registrasi berhasil!');</script>";
         } else {
@@ -121,6 +126,7 @@ if (isset($_POST["submit"])) {
             color: white;
             font-size: 20px;
         }
+
         .errors {
             background: #ff9a9e;
             color: white;
@@ -131,26 +137,32 @@ if (isset($_POST["submit"])) {
         }
 
         .form-group {
-            margin-bottom: 15px;
-            position: relative;
-        }
+        margin-bottom: 15px;
+    }
 
-        .form-group label {
-            display: block;
-            color: #555;
-        }
+    .form-group label {
+        display: block;
+        color: #555;
+        /* font-weight: bold; */
+        margin-bottom: 5px;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            transition: box-shadow 0.2s ease-in-out;
-        }
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
-        .form-group input:focus {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    /* Grid container */
+    .form-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Mengatur dua kolom yang sama lebar */
+        gap: 20px; /* Jarak antar elemen */
+    }
+
 
         .eye-icon {
             position: absolute;
@@ -181,6 +193,37 @@ if (isset($_POST["submit"])) {
         a:hover {
             color: black;
         }
+
+        .formrole {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 0px;
+        margin-bottom: 16px;
+    }
+
+    /* Styling options */
+    .formrole option {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    /* Hover effect */
+    .formrole option:hover {
+        background-color: #e9e9e9;
+    }
+
+    /* Focus effect */
+    .formrole option:focus {
+        outline: none;
+        background-color: #ccc;
+    }
+
+
+
     </style>
 </head>
 <body>
@@ -204,30 +247,39 @@ if (isset($_POST["submit"])) {
             }
             ?>
             <form action="" method="post" autocomplete="off">
-                <div class="form-group">
-                    <label for="name">Nama:</label>
-                    <input type="text" name="name" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Kata Sandi:</label>
-                    <input type="password" name="password" id="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmpassword">Konfirmasi Kata Sandi:</label>
-                    <input type="password" name="confirmpassword" id="confirmpassword" required>
-                </div>
-                <button type="submit" name="submit">Daftar</button>
-            </form>
+    <div class="form-container">
+        <div class="form-group">
+            <label for="name">Nama:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Kata Sandi:</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmpassword">Konfirmasi Kata Sandi:</label>
+            <input type="password" name="confirmpassword" id="confirmpassword" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Pilih Role:</label>
+            <select class="formrole" id="select-role" name="role" required>
+                <option value="admin">Admin</option>
+                <option value="customer">Customer</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" name="submit">Daftar</button>
+</form>
             <br>
-            <a href="login.php">Sudah punya akun? Login di sini.</a>
+            <a href="login.php">Sudah punya akun? Login di sini.</a><br>
         </div>
     </div>
 
