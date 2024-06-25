@@ -177,42 +177,64 @@ else{
 <!-- Service End -->
 
 
-    <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center">
-                <h6 class="section-title bg-white text-center px-3" style="color: var(--primary);" >Testimonial</h6>
-                <h1 class="mb-5" style="color: #527853;">Our Clients Say!!!</h1>
+<!-- Testimonial Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center px-3" style="color: var(--primary);">Testimonial</h6>
+            <h1 class="mb-5" style="color: #527853;">Our Clients Say!!!</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel position-relative">
+            <!-- Testimonials go here -->
+        </div>
+        </div>
+        <div class="owl-carousel testimonial-carousel position-relative">
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Jake</h5>
+                <p>Bandung, Jawa Barat</p>
+                <p class="mt-2 mb-0 flex-grow-1">Paket 2 sangat memuaskan! Keraton Surakarta selalu menakjubkan, dan Museum Tumurun menambahkan perspektif seni modern yang menarik. Pasar Klewer penuh dengan kehidupan, makanan enak, dan banyak tempat untuk berbelanja. Sangat berkesan!</p>
             </div>
-            <div class="owl-carousel testimonial-carousel position-relative">
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Taylor</h5>
+                <p>Malang, Jawa Timur</p>
+                <p class="mt-2 mb-0 flex-grow-1">Paket 7 benar-benar paket yang lengkap! Pasar Klewer sangat ramai dengan barang-barang murah, Pura Mangkunegaran sangat elegan, dan belajar batik di Kampung Batik Kauman adalah pengalaman yang sangat berharga. Kita juga mengunjungi Museum Tumurun sangatlah menakjubkan. Pasti akan merekomendasikan paket ini kepada teman-teman saya.</p>
+            </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Junkyu</h5>
+                <p>Bekasi, Jawa Barat</p>
+                <p class="mt-2 mb-0 flex-grow-1">Saya besama teman-teman memesan paket 11 memberikan pengalaman yang lengkap dan bervariasi. Dari sejarah di Keraton Surakarta dan Pura Mangkunegaran hingga pengalaman unik dengan Kereta Api Jalandra, semuanya sangat mengesankan. Gedung Djoeang 45 juga menawarkan banyak informasi sejarah yang menarik. Dan berbelanja di Pasar Klewer yang barangnya kualitas baik dengan harga yang terjangkau.</p>
+            </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Nadin Amizah</h5>
+                <p>Surakarta, Jawa tengah</p>
+                <p class="mt-2 mb-0 flex-grow-1">Saya sangat menikmati Paket 5. Museum Batik Danar Hadi memiliki koleksi yang luar biasa, dan Taman Sriwedari adalah tempat yang indah untuk bersantai. Mengunjungi salah satu keraton yang berada di Solo tepatnya bernama Keraton Surakarta (Kesunanan) yang sangat historical. Terima kasih kepada tim travel yang telah membuat perjalanan ini sangat menyenangkan!</p>
+            </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-5.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Shawn Mendes</h5>
+                <p>Bekasi, Jawa Barat</p>
+                <p class="mt-2 mb-0 flex-grow-1">Paket 6 menawarkan kombinasi sempurna antara sejarah, belanja, dan rekreasi. Pura Mangkunegaran sangat indah, dan Pasar Klewer penuh dengan barang-barang menarik. Mengakhiri hari di Taman Balekambang sangat menyenangkan.</p>
+            </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-6.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Jay</h5>
+                <p>Surabaya</p>
+                <p class="mt-2 mb-0 flex-grow-1">Paket 14 adalah perjalanan yang sangat memuaskan. Museum Batik Danar Hadi memiliki koleksi yang luar biasa, dan Solo Safari adalah pengalaman yang sangat menyenangkan untuk anak-anak. Masjid Raya Sheikh Zayed sangat mengesankan. Saya juga berbelanja di Pasar Klewer yang tempatnya bersih dan pedagangnya ramah. Santai sore menikmati suasana solo di Taman Balekambang sangatlah menenangkan.</p>
+            </div>
+            <div class="testimonial-item bg-white text-center border p-4 h-100 d-flex flex-column">
+                <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-7.jpg" style="width: 80px; height: 80px;">
+                <h5 class="mb-0">Tiara Andini</h5>
+                <p>Tegal, Jawa Tengah</p>
+                <p class="mt-2 mb-0 flex-grow-1">Paket 15 benar-benar berkesan! Belajar membatik di Kampung Batik Kauman adalah pengalaman yang sangat berharga, dan pertunjukan di Gedung Wayang Orang Sriwedari sangat memukau. Mencoba berbagai kuliner di Pasar Gede dan tidak lupa berbelanja oleh-oleh. Tempat unik nan menawan di Lokananta Bloc dapat bersantai, menikmati suasana sambil menyantap sajian yang dipesan. Mendapat informasi baru mengenai artefak sejarah di Gedung Djoeang 45. Terima kasih untuk perjalanan yang luar biasa!</p>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+</div>
+<!-- Testimonial End -->
         
 
     <!-- Footer Start -->

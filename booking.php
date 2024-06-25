@@ -315,7 +315,6 @@ if (!empty($_SESSION["id"])) {
                                             <option value="Paket 3">Paket 13</option>
                                             <option value="Paket 3">Paket 14</option>
                                             <option value="Paket 3">Paket 15</option>
-                                            <!-- Tambahkan pilihan paket wisata lainnya sesuai kebutuhan -->
                                         </select>
                                         <label for="select1">Pilihan Paket Wisata</label>
                                     </div>
