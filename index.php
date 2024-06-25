@@ -852,14 +852,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Handle file upload
-    if (isset($_FILES["transferProof"]) && $_FILES["transferProof"]["error"] == 0) {
+    if (isset($_FILES["transfer_proof"]) && $_FILES["transfer_proof"]["error"] == 0) {
         $target_dir = "uploads/";
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
         }
-        $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
+        $target_file = $target_dir . basename($_FILES["transfer_proof"]["name"]);
 
-        if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($_FILES["transfer_proof"]["tmp_name"], $target_file)) {
             // Insert data into database
             $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
                     VALUES (?, ?, ?, ?, ?, ?)";
