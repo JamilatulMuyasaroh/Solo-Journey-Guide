@@ -68,11 +68,15 @@ if (isset($_POST["submit"])) {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #F9E8D9;
+            background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url('img/balaikota.jpg');
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-size: cover;
         }
 
         .split {
@@ -82,11 +86,12 @@ if (isset($_POST["submit"])) {
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
+            border : 1px solid white;
         }
 
         .left {
             flex: 0.4; 
-            background: linear-gradient(to right, #EE7214,  #F7B787); 
+            background: linear-gradient(to right, rgb(238, 114, 20,0.9),  rgb(247, 183, 135,0.9)); 
             color: white;
             display: flex;
             justify-content: center;
@@ -97,7 +102,7 @@ if (isset($_POST["submit"])) {
 
         .right {
             flex: 0.6; 
-            background: white;
+            background: rgb(255,255,255, 0.9);
             padding: 40px;
             display: flex;
             flex-direction: column;

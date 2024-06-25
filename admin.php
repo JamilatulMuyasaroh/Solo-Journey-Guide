@@ -1,5 +1,9 @@
 <?php
 require 'koneksi.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 // Periksa apakah pengguna telah login sebagai admin
 if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"])) {
@@ -70,7 +74,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
 
         .logout a {
             text-decoration: none;
-            background-color: #EE7214;
+            background-color: #527853;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -79,6 +83,25 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
 
         .logout a:hover {
             background-color: #333;
+        }
+
+        .btn-hapus {
+            background-color: #ff4d4d; /* Red background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Inline block */
+            font-size: 16px; /* Font size */
+            margin: 4px 2px; /* Margin */
+            cursor: pointer; /* Pointer cursor on hover */
+            border-radius: 8px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .btn-hapus:hover {
+            background-color: #ff1a1a; /* Darker red on hover */
         }
     </style>
 </head>
@@ -91,6 +114,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
                 <th>Nama</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Aksi</th>
             </tr>
             <?php
             if (mysqli_num_rows($result_user) > 0) {
