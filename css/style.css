@@ -7,6 +7,7 @@
     --hijau: #527853;        /* Green */
     --black: #000000;        /* Black */
     --white: #FFFFFF;        /* White */
+    --whitetransparet : rgba(246, 241, 241, 0.833); 
 }
 
 .fw-medium {

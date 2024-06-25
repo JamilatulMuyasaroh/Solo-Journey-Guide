@@ -1,303 +1,254 @@
 <?php
 require 'koneksi.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-// Periksa apakah pengguna telah login sebagai admin
-if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"])) {
-    header("Location: login.php"); // Redirect ke halaman login jika tidak login
-    exit;
-}
-
 // Periksa apakah pengguna telah login dan memiliki peran admin
 // if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"]) || !isset($_SESSION["role"]) || $_SESSION["role"] !== 'admin') {
 //     header("Location: login.php"); // Redirect ke halaman login jika tidak login atau bukan admin
 //     exit;
 // }
 
-?>
-    <div className="profile">
-      <div className="balkot-1">
-      </div>
-      <div className="rectangle-2">
-      </div>
-      <div className="container-4">
-        <div className="logo-rev-1">
-        </div>
-        <div className="container-5">
-          <img className="vector-1" src="assets/vectors/Vector152_x2.svg" />
-          <span className="dashboard">
-            Dashboard
-          </span>
-        </div>
-        <div className="data-pesanan">
-          Data Pesanan
-        </div>
-        <div className="container-3">
-          <img className="vector-4" src="assets/vectors/Vector660_x2.svg" />
-          <span className="data-user">
-            Data User
-          </span>
-        </div>
-        <div className="container-1">
-          <img className="vector-3" src="assets/vectors/Vector122_x2.svg" />
-          <span className="ulasan-customer">
-            Ulasan Customer
-          </span>
-        </div>
-        <div className="container-6">
-          <img className="vector" src="assets/vectors/Vector680_x2.svg" />
-          <span className="profile-2">
-            Profile
-          </span>
-        </div>
-        <div className="container">
-          <img className="vector-2" src="assets/vectors/Vector926_x2.svg" />
-          <span className="logout">
-            Logout
-          </span>
-        </div>
-      </div>
-      <div className="container-7">
-        <span className="profile-1">
-          Profile
-        </span>
-        <div className="here-is-your-profile-data">
-          Here is your profile data
-        </div>
-        <div className="group-65">
-          <div className="container-2">
-            <img className="ellipse-11" src="assets/vectors/Ellipse1121_x2.svg" />
-            <div className="tiara-andini">
-              Tiara Andini
-            </div>
-          </div>
-          <span className="tiara-tiaragmail-com-6285123456789-jakarta-indonesia">
-            tiara<br />
-            tiara@gmail.com<br />
-            +6285123456789<br />
-            Jakarta, Indonesia
-          </span>
-        </div>
-      </div>
-    </div>
-  )
-}
+// Ambil data user dari tabel user
+$sql_user = "SELECT * FROM user";
+$result_user = mysqli_query($conn, $sql_user);
 
-<style>
-    .profile {
-    background: #FFFFFF;
-    display: flex;
-    flex-direction: row;
-    padding-right: 50px;
-    width: 1280px;
-    box-sizing: border-box;
+// Ambil data pesanan dari tabel pesanan
+$sql_pesanan = "SELECT * FROM pesanan";
+$result_pesanan = mysqli_query($conn, $sql_pesanan);
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Admin - Data User dan Pesanan</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f1f1f1;
+        display: flex;
+        background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url('img/balaikota.jpg');
+        background-size: cover;
+        background-position: center;
     }
-    .profile .balkot-1 {
-    background: url('assets/images/Balkot4.jpeg') 50% / cover no-repeat;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    height: 100%;
+
+    .sidebar {
+        width: 250px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+        height: 1000px;
     }
-    .profile .rectangle-2 {
-    background: rgba(0, 0, 0, 0.51);
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    height: 100%;
+
+    .sidebar img {
+        width: 150px;
+        display: block;
+        margin: 0 auto 20px;
     }
-    .profile .logo-rev-1 {
-    background: url('assets/images/LogoRev1.png') 50% / cover no-repeat;
-    margin: 0 12.8px 56px 0;
-    width: 114px;
-    height: 81px;
+
+    .sidebar a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        transition: background 0.3s ease;
     }
-    .profile .dashboard {
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+
+    .sidebar a:hover {
+        background-color: #f2f2f2;
     }
-    .profile .profile-1 {
-    align-self: flex-start;
-    overflow-wrap: break-word;
-    font-family: 'Heebo';
-    font-weight: 700;
-    font-size: 35px;
-    color: #FFFFFF;
+
+    .main-content {
+        flex-grow: 1;
+        padding: 30px;
+        color: white;
     }
-    .profile .here-is-your-profile-data {
-    margin-bottom: 65px;
-    display: inline-block;
-    align-self: flex-start;
-    overflow-wrap: break-word;
-    font-family: 'Heebo';
-    font-weight: 500;
-    font-size: 15px;
-    color: #FFFFFF;
+
+    .main-content h1 {
+        font-size: 40px;
+        padding: 0px;
     }
-    .profile .data-user {
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+
+    .container {
+        max-width: 1000px;
+        /* margin: 20px auto; */
+        background: rgba(255, 255, 255, 1); /* White background */
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 3; /* Make sure it is above the overlay */
     }
-    .profile .ulasan-customer {
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        /* margin-top: 20px; */
     }
-    .profile .data-pesanan {
-    margin: 0 0 33px 19.6px;
-    display: inline-block;
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+
+    table, th, td {
+        /* border: 1px solid #14141F; */
     }
-    .profile .profile-2 {
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        color: #14141F;
     }
-    .profile .logout {
-    overflow-wrap: break-word;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 15px;
-    color: #527853;
+
+    th {
+        background-color: #ffffff;
+        color: black;
+        text-align: left;
     }
-    .profile .vector {
-    width: 20px;
-    height: 20px;
+
+    tr:nth-child(even) {
+        background-color: #F9E8D9;
     }
-    .profile .vector-1 {
-    width: 20px;
-    height: 20px;
+
+    tr:nth-child(odd) {
+        background-color: #ffffff;
     }
-    .profile .vector-2 {
-    width: 20px;
-    height: 20px;
+
+    .btn-hapus {
+        background-color: #ff4d4d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
     }
-    .profile .vector-3 {
-    width: 20px;
-    height: 20px;
+
+    .btn-hapus:hover {
+        background-color: #ff1a1a;
     }
-    .profile .vector-4 {
-    margin-bottom: 4px;
-    width: 20px;
-    height: 16px;
+
+    .logout {
+        text-align: center;
+        margin-top: 20px;
     }
-    .profile .group-65 {
-    border-radius: 20px;
-    background: #FFFFFF;
-    position: relative;
-    padding: 27px 36.3px 49.2px 36.3px;
-    width: fit-content;
-    box-sizing: border-box;
+
+    .logout a {
+        text-decoration: none;
+        background-color: #527853;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
     }
-    .profile .tiara-andini {
-    margin-bottom: 75.5px;
-    display: inline-block;
-    overflow-wrap: break-word;
-    font-family: 'Heebo';
-    font-weight: 700;
-    font-size: 32px;
-    color: #527853;
+
+    .logout a:hover {
+        background-color: #333;
     }
-    .profile .tiara-tiaragmail-com-6285123456789-jakarta-indonesia {
-    position: absolute;
-    left: 179.4px;
-    bottom: 38.7px;
-    overflow-wrap: break-word;
-    font-family: 'Heebo';
-    font-weight: 500;
-    font-size: 15px;
-    color: #527853;
+
+    .homepage {
+        text-align: center;
+        margin-top: 20px;
     }
-    .profile .ellipse-11 {
-    margin: 10px 26.6px 0 0;
-    width: 115.4px;
-    height: 112.5px;
+
+    .homepage a {
+        text-decoration: none;
+        background-color: #EE7214;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
     }
-    .profile .container {
-    margin-right: 70.7px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 92.1px;
-    box-sizing: border-box;
+
+    .homepage a:hover {
+        background-color: #F7B787;
     }
-    .profile .container-1 {
-    margin-bottom: 243px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 162.8px;
-    box-sizing: border-box;
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        padding: 10px 10px;
+        }
+
+    .menu-item img {
+        width: 20px; 
+        margin-right: 10px;
+        align-items: center;
+        padding: 25px 0px 5px 10px;
+
     }
-    .profile .container-2 {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
+
+    .menu-item a {
+        text-decoration: none;
+        color: #527853;
+        flex-grow: 1;
+        font-weight:bold;
+        display: block;
+        padding: 10px 10;
+        transition: background 0.3s ease;
+
     }
-    .profile .container-3 {
-    margin: 0 49.8px 32px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 113.1px;
-    box-sizing: border-box;
+
+    .menu-item:hover {
+        border-radius :10px;
+        background-color: #f2f2f2;
     }
-    .profile .container-4 {
-    background: #FFFFFF;
-    position: relative;
-    margin-right: 33px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 66px 0 110px 0;
-    width: 250px;
-    box-sizing: border-box;
+
+    .menuu{
+        margin-top:50px;
     }
-    .profile .container-5 {
-    margin: 0 43.5px 33px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 119.3px;
-    box-sizing: border-box;
-    }
-    .profile .container-6 {
-    margin: 0 73.9px 26px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 89px;
-    box-sizing: border-box;
-    }
-    .profile .container-7 {
-    position: relative;
-    margin: 66px 0 397.3px 0;
-    display: flex;
-    flex-direction: column;
-    width: 947px;
-    box-sizing: border-box;
-    }
-</style>
+    
+    </style>
+</head>
+<body>
+<div class="sidebar">
+        <img src="img/logooo.png" alt="Logo"> 
+        <div class="menuu">
+        <div class="menu-item">
+            <img src="img/dashboard.png" alt="Dashboard Logo">
+            <a href="admin.php">Dashboard</a>
+        </div>
+        <div class="menu-item">
+            <img src="img/pesanan.png" alt="Dashboard Logo">
+            <a href="datapesanan.php">Data Pesanan</a>
+        </div>
+        <div class="menu-item">
+            <img src="img/datauser.png" alt="Dashboard Logo">
+            <a href="datauser.php">Data User</a>
+        </div>
+        <div class="menu-item">
+            <img src="img/ulasan.png" alt="Dashboard Logo">
+            <a href="ulasan.php">Ulasan User</a>
+        </div>
+        <div class="menu-item">
+            <img src="img/profilee.png" alt="Dashboard Logo">
+            <a href="profile.php">Profile</a>
+        </div>
+        <div class="menu-item">
+            <img src="img/logout.png" alt="Dashboard Logo">
+            <a href="logout.php">Logout</a>
+        </div>
+        <div class ="homepage">
+            <a href="index.php">Back to HomePage</a>
+        </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+    <div class="header">
+        <h1>Profile</h1>
+        <p>Check Out lastest updates</p>
+        
+        </div>
+    </div>
+</div>
+</body>
+</html>
