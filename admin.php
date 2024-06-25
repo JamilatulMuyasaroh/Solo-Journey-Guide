@@ -44,7 +44,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: #fff;
             padding: 20px;
