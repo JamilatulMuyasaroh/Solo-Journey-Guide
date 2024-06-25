@@ -1,24 +1,11 @@
 <?php
 require 'koneksi.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-// Periksa apakah pengguna telah login sebagai admin
-if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"])) {
-    header("Location: login.php"); // Redirect ke halaman login jika tidak login
-    exit;
-}
-
 // Periksa apakah pengguna telah login dan memiliki peran admin
 // if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || !isset($_SESSION["id"]) || !isset($_SESSION["role"]) || $_SESSION["role"] !== 'admin') {
 //     header("Location: login.php"); // Redirect ke halaman login jika tidak login atau bukan admin
 //     exit;
 // }
-
-
 
 // Ambil data user dari tabel user
 $sql_user = "SELECT * FROM user";
@@ -39,24 +26,90 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background: #f1f1f1;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+
+        .sidebar img {
+            width: 100px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            background-image: url('img/balaikota.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Full height */
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+            z-index: 1;
+        }
+
+        .header h1,
+        .header img {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header img {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
         }
 
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 3; /* Make sure it is above the overlay */
         }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -74,6 +127,25 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
 
         th {
             background-color: #f2f2f2;
+        }
+
+        .btn-hapus {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-hapus:hover {
+            background-color: #ff1a1a;
         }
 
         .logout {
@@ -111,97 +183,49 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
         .homepage a:hover {
             background-color: #F7B787;
         }
-
-
-        .btn-hapus {
-            background-color: #ff4d4d; /* Red background */
-            border: none; /* Remove border */
-            color: white; /* White text */
-            padding: 10px 20px; /* Padding */
-            text-align: center; /* Center text */
-            text-decoration: none; /* Remove underline */
-            display: inline-block; /* Inline block */
-            font-size: 16px; /* Font size */
-            margin: 4px 2px; /* Margin */
-            cursor: pointer; /* Pointer cursor on hover */
-            border-radius: 8px; /* Rounded corners */
-            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-        }
-
-        .btn-hapus:hover {
-            background-color: #ff1a1a; /* Darker red on hover */
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Data User</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Aksi</th>
-            </tr>
+    <div class="sidebar">
+        <img src="img/logooo.png" alt="Logo"> 
+        <a href="admin.php?page=dashboard">Dashboard</a>
+        <a href="admin.php?page=data_pesanan">Data Pesanan</a>
+        <a href="admin.php?page=data_user">Data User</a>
+        <a href="admin.php?page=ulasan">Ulasan Customer</a>
+        <a href="admin.php?page=profile">Profile</a>
+        <a href="logout.php" class="logout">Logout</a>
+    </div>
+    
+    <div class="main-content">
+    <div class="header">
+        <img src="img/logooo.png" alt="Logo"> 
+        <h1>Profile</h1>
+        <div class="container">
             <?php
-            if (mysqli_num_rows($result_user) > 0) {
-                while ($row = mysqli_fetch_assoc($result_user)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['username'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['role'] . "</td>";
-                    echo "<td><a href='deleteuser.php?id=" . $row["id"] . "' class='btn btn-hapus' onclick='return confirm(\"Apakah Anda yakin ingin menghapus item ini?\")'>Hapus</a></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>Tidak ada data user.</td></tr>";
+            $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+            
+            switch($page) {
+                case 'dashboard':
+                    include 'dashboard.php';
+                    break;
+                case 'datapesanan':
+                    include 'datapesanan.php';
+                    break;
+                case 'datauser':
+                    include 'datauser.php';
+                    break;
+                case 'profile':
+                    include 'profile.php';
+                    break;
+                case 'ulasan':
+                    include 'ulasan.php';
+                    break;
+                default:
+                    include 'dashboard.php';
             }
             ?>
-        </table>
-
-        <h1>Data Pesanan</h1>
-        <table>
-            <tr>
-                <th>ID Pesanan</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Tanggal Pesanan</th>
-                <th>Paket</th>
-                <th>Pesan</th>
-                <th>Bukti Transfer</th>
-                <th>Aksi</th> <!-- Tambahkan kolom untuk aksi -->
-            </tr>
-            <?php
-            if (mysqli_num_rows($result_pesanan) > 0) {
-                while ($row = mysqli_fetch_assoc($result_pesanan)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td>" . $row['datetime'] . "</td>";
-                    echo "<td>" . $row['package'] . "</td>";
-                    echo "<td>" . $row['message'] . "</td>";
-                    echo "<td><img src='path/to/your/uploads/" . $row['transfer_proof'] . "' style='max-width: 100px;' /></td>";
-                    echo "<td><a href='delete.php?id=" . $row["id"] . "' class='btn btn-hapus' onclick='return confirm(\"Apakah Anda yakin ingin menghapus item ini?\")'>Hapus</a></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>Tidak ada data pesanan.</td></tr>"; // Sesuaikan colspan menjadi 8
-            }
-            ?>
-        </table>
-
-
-        <div class="logout">
-            <span><a href="logout.php">Logout</a></span>
-        </div><br>
-        <div class ="homepage">
-            <a href="index.php">Back to HomePage</a>
         </div>
     </div>
+</div>
 </body>
 </html>
