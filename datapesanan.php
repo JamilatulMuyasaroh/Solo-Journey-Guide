@@ -14,6 +14,8 @@ $result_user = mysqli_query($conn, $sql_user);
 // Ambil data pesanan dari tabel pesanan
 $sql_pesanan = "SELECT * FROM pesanan";
 $result_pesanan = mysqli_query($conn, $sql_pesanan);
+
+$targetDir = "uploads/"; 
 ?>
 
 <!DOCTYPE html>
@@ -268,7 +270,7 @@ $result_pesanan = mysqli_query($conn, $sql_pesanan);
                     echo "<td>" . $row['datetime'] . "</td>";
                     echo "<td>" . $row['package'] . "</td>";
                     echo "<td>" . $row['message'] . "</td>";
-                    echo "<td><img src='path/to/your/uploads/" . $row['transfer_proof'] . "' style='max-width: 100px;' /></td>";
+                    echo "<td><img src='" . $row["transfer_proof"] . "' alt='" . $row["name"] . "'style='max-width: 100px;'>"; 
                     echo "<td><a href='delete.php?id=" . $row["id"] . "' class='btn btn-hapus' onclick='return confirm(\"Apakah Anda yakin ingin menghapus item ini?\")'>Hapus</a></td>";
                     echo "</tr>";
                 }
