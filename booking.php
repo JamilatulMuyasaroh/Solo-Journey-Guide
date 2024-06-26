@@ -172,181 +172,178 @@ if (!empty($_SESSION["id"])) {
         </div>
     </div>
 
-    <!-- Booking Start -->
     <?php
-    // Cek apakah sesi sudah dimulai
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
+// Cek apakah sesi sudah dimulai
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Sertakan file koneksi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rplproject";
+
+// Buat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$error_messages = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $datetime = isset($_POST['datetime']) ? $_POST['datetime'] : '';
+    $package = isset($_POST['package']) ? $_POST['package'] : '';
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
+
+    // Validasi input
+    if (empty($name)) {
+        $error_messages[] = "Nama tidak boleh kosong.";
+    }
+    if (empty($email)) {
+        $error_messages[] = "Email tidak boleh kosong.";
+    }
+    if (empty($datetime)) {
+        $error_messages[] = "Tanggal dan waktu tidak boleh kosong.";
+    }
+    if (empty($package)) {
+        $error_messages[] = "Pilihan paket wisata tidak boleh kosong.";
     }
 
-    // Sertakan file koneksi
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "rplproject";
+    // Log debugging untuk nilai input
+    error_log("Nama: $name");
+    error_log("Email: $email");
+    error_log("Tanggal & Waktu: $datetime");
+    error_log("Paket: $package");
+    error_log("Pesan: $message");
 
-    // Buat koneksi
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Cek koneksi
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $error_messages = [];
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = isset($_POST['name']) ? $_POST['name'] : '';
-        $email = isset($_POST['email']) ? $_POST['email'] : '';
-        $datetime = isset($_POST['datetime']) ? $_POST['datetime'] : '';
-        $package = isset($_POST['package']) ? $_POST['package'] : '';
-        $message = isset($_POST['message']) ? $_POST['message'] : '';
-
-        // Validasi input
-        if (empty($name)) {
-            $error_messages[] = "Nama tidak boleh kosong.";
+    // Handle file upload
+    if (isset($_FILES["transferProof"]) && $_FILES["transferProof"]["error"] == 0) {
+        $target_dir = "uploads/";
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
         }
-        if (empty($email)) {
-            $error_messages[] = "Email tidak boleh kosong.";
-        }
-        if (empty($datetime)) {
-            $error_messages[] = "Tanggal dan waktu tidak boleh kosong.";
-        }
-        if (empty($package)) {
-            $error_messages[] = "Pilihan paket wisata tidak boleh kosong.";
-        }
+        $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
 
-        // Handle file upload
-        if (isset($_FILES["transferProof"]) && $_FILES["transferProof"]["error"] == 0) {
-            $target_dir = "uploads/";
-            if (!file_exists($target_dir)) {
-                mkdir($target_dir, 0777, true); // Buat direktori jika belum ada
-            }
-            $target_file = $target_dir . basename($_FILES["transferProof"]["name"]);
-
-            if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
-                // Insert data into database
-                $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
+        if (move_uploaded_file($_FILES["transferProof"]["tmp_name"], $target_file)) {
+            // Insert data into database
+            $sql = "INSERT INTO pesanan (name, email, datetime, package, message, transfer_proof)
                     VALUES (?, ?, ?, ?, ?, ?)";
 
-                $stmt = $conn->prepare($sql);
-                if ($stmt === false) {
-                    $error_messages[] = "Prepare statement failed.";
-                } else {
-                    $stmt->bind_param("ssssss", $name, $email, $datetime, $package, $message, $target_file);
-                    if ($stmt->execute()) {
-                        $success_message = "Data pesanan berhasil disimpan.";
-                    } else {
-                        $error_messages[] = "Error: " . $stmt->error;
-                    }
-                    $stmt->close();
-                }
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                $error_messages[] = "Prepare statement failed: " . $conn->error;
+                error_log("Prepare statement failed: " . $conn->error);
             } else {
-                $error_messages[] = "Gagal mengunggah bukti transfer.";
+                $stmt->bind_param("ssssss", $name, $email, $datetime, $package, $message, $target_file);
+                if ($stmt->execute()) {
+                    $success_message = "Data pesanan berhasil disimpan.";
+                } else {
+                    $error_messages[] = "Execute failed: " . $stmt->error;
+                    error_log("Execute failed: " . $stmt->error);
+                }
+                $stmt->close();
             }
         } else {
-            $error_messages[] = "File bukti transfer tidak ditemukan atau terjadi kesalahan.";
+            $error_messages[] = "Gagal mengunggah bukti transfer.";
+            error_log("Gagal mengunggah bukti transfer.");
         }
+    } else {
+        $error_messages[] = "File bukti transfer tidak ditemukan atau terjadi kesalahan.";
+        error_log("File bukti transfer tidak ditemukan atau terjadi kesalahan.");
     }
+}
 
-    ?>
+?>
 
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="booking p-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-md-6 text-white">
-                        <h6 class="text-white text-uppercase">Booking</h6>
-                        <h1 class="text-white mb-4">Online Booking</h1>
-                        <p class="mb-4" style="text-align: justify;">Dengan Online Booking, Anda dapat merencanakan perjalanan Anda dengan mudah dan nyaman. Cukup pilih paket yang diinginkan, tentukan tanggal perjalanan, dan lengkapi informasi pribadi Anda. Setelah itu, Anda akan menerima konfirmasi booking. Nikmati kemudahan dan fleksibilitas dalam merencanakan petualangan Anda bersama kami!</p>
-                    </div>
-                    <div class="col-md-6">
-                        <h1 class="text-white mb-4">Book A Tour</h1>
-                        <?php if (!empty($error_messages)) : ?>
-                            <div class="alert alert-danger" role="alert">
-                                <ul>
-                                    <?php foreach ($error_messages as $error) : ?>
-                                        <li><?php echo $error; ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (isset($success_message)) : ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $success_message; ?>
-                            </div>
-                        <?php endif; ?>
-                        <form id="bookingForm" enctype="multipart/form-data" method="post">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent" id="name" name="name" placeholder="Your Name" required>
-                                        <label for="name">Nama Lengkap</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control bg-transparent" id="email" name="email" placeholder="Your Email" required>
-                                        <label for="email">Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" name="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" required />
-                                        <label for="datetime">Hari & Tanggal</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select bg-transparent" id="select1" name="package" required>
-                                            <option value="">Pilih Paket Wisata</option>
-                                            <option value="Paket 1">Paket 1</option>
-                                            <option value="Paket 2">Paket 2</option>
-                                            <option value="Paket 3">Paket 3</option>
-                                            <option value="Paket 3">Paket 4</option>
-                                            <option value="Paket 3">Paket 5</option>
-                                            <option value="Paket 3">Paket 6</option>
-                                            <option value="Paket 3">Paket 7</option>
-                                            <option value="Paket 3">Paket 8</option>
-                                            <option value="Paket 3">Paket 9</option>
-                                            <option value="Paket 3">Paket 10</option>
-                                            <option value="Paket 3">Paket 11</option>
-                                            <option value="Paket 3">Paket 12</option>
-                                            <option value="Paket 3">Paket 13</option>
-                                            <option value="Paket 3">Paket 14</option>
-                                            <option value="Paket 3">Paket 15</option>
-                                        </select>
-                                        <label for="select1">Pilihan Paket Wisata</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" name="message" style="height: 100px"></textarea>
-                                        <label for="message">Special Request</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="file" class="form-control bg-transparent" id="transferProof" name="transferProof" required>
-                                        <label for="transferProof">Upload Bukti Transfer</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="booking p-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-md-6 text-white">
+                    <h6 class="text-white text-uppercase">Booking</h6>
+                    <h1 class="text-white mb-4">Online Booking</h1>
+                    <p class="mb-4" style="text-align: justify;">Dengan Online Booking, Anda dapat merencanakan perjalanan Anda dengan mudah dan nyaman. Cukup pilih paket yang diinginkan, tentukan tanggal perjalanan, dan lengkapi informasi pribadi Anda. Setelah itu, Anda akan menerima konfirmasi booking. Nikmati kemudahan dan fleksibilitas dalam merencanakan petualangan Anda bersama kami!</p>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="text-white mb-4">Book A Tour</h1>
+                    <?php if (!empty($error_messages)) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                <?php foreach ($error_messages as $error) : ?>
+                                    <li><?php echo $error; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($success_message)) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $success_message; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form id="bookingForm" enctype="multipart/form-data" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-transparent" id="name" name="name" placeholder="Your Name" required>
+                                    <label for="name">Nama Lengkap</label>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control bg-transparent" id="email" name="email" placeholder="Your Email" required>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date3" data-target-input="nearest">
+                                    <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" name="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" required />
+                                    <label for="datetime">Hari & Tanggal</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select bg-transparent" id="select1" name="package" required>
+                                        <option value="">Pilih Paket Wisata</option>
+                                        <?php for ($i = 1; $i <= 15; $i++): ?>
+                                            <option value="Paket <?php echo $i; ?>">Paket <?php echo $i; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                    <label for="select1">Pilihan Paket Wisata</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" name="message" style="height: 100px"></textarea>
+                                    <label for="message">Special Request</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="file" class="form-control bg-transparent" id="transferProof" name="transferProof" required>
+                                    <label for="transferProof">Upload Bukti Transfer</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <?php
-    // Tutup koneksi
-    $conn->close();
-    ?>
-
+<?php
+// Tutup koneksi
+$conn->close();
+?>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">

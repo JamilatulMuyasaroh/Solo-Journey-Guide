@@ -128,7 +128,7 @@ if (isset($_POST["submit"])) {
         }
 
         .errors {
-            background: #ff9a9e;
+            background: #FF000A;
             color: white;
             padding: 10px;
             border-radius: 5px;
